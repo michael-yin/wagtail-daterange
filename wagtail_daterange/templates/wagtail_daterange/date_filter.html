@@ -1,0 +1,28 @@
+{% load i18n admin_static %}
+<h3>{% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}</h3>
+<script src="{% static 'wagtailadmin/js/page-editor.js' %}"></script>
+<script>
+    function datefilter_apply(event, qs_name, form_name){
+        event.preventDefault();
+        var query_string = $('input#'+qs_name).val();
+        var form_data = $('#'+form_name).serialize();
+        window.location = window.location.pathname + query_string + '&' + form_data;
+    }
+    function datefilter_reset(qs_name){
+        var query_string = $('input#'+qs_name).val();
+        window.location = window.location.pathname + query_string;
+    }
+</script>
+
+<div class="wagtailrangefilter">
+    <form method="GET" action="." id="{{ choices.0.system_name }}-form">
+        {{ spec.form.as_p }}
+        {% for choice in choices %}
+          <input type="hidden" id="{{ choice.system_name }}-query-string" value="{{ choice.query_string }}">
+        {% endfor %}
+        <div class="controls">
+            <input type="submit" class="button" value="{% trans "Search" %}" onclick="datefilter_apply(event, '{{ choices.0.system_name }}-query-string', '{{ choices.0.system_name }}-form')">
+            <input type="reset" class="button" value="{% trans "Reset" %}" onclick="datefilter_reset('{{ choices.0.system_name }}-query-string')">
+        </div>
+    </form>
+</div>
