@@ -17,10 +17,10 @@ Use your favorite Python package manager to install the app from PyPI, e.g.
 
 Example:
 
-``pip install django-admin-rangefilter``
+``pip install git+git://<this repo>``
 
 
-Add ``rangefilter`` to ``INSTALLED_APPS``:
+Add ``wagtail_daterange`` to ``INSTALLED_APPS``:
 
 Example:
 
@@ -28,7 +28,7 @@ Example:
 
     INSTALLED_APPS = (
         ...
-        'rangefilter',
+        'wagtail_daterange',
         ...
     )
 
@@ -42,7 +42,7 @@ In admin
 .. code:: python
 
     from django.contrib import admin
-    from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
+    from wagtail_daterange.filter import DateRangeFilter, DateTimeRangeFilter
 
     @admin.register(Post)
     class PostAdmin(admin.ModelAdmin):
